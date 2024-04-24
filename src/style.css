@@ -1,3 +1,8 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -11,7 +16,16 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-image: url('https://64.media.tumblr.com/4d081880cdda121fea8531da331cd4c3/tumblr_oj0t98AucT1t2ijwho1_500.gif');
+  background-size: cover;
 }
+
+.searchbar {
+  width: 1000px;
+}
+
+
 
 a {
   font-weight: 500;
@@ -33,6 +47,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #3BABFD;
 }
 
 button {
