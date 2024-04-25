@@ -8,6 +8,7 @@
 
     //I dunno
     "noImplicitAny": false,
+    
 
     /* Bundler mode */
     "moduleResolution": "bundler",
