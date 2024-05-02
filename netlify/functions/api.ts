@@ -23,7 +23,9 @@ router.post("/getForecast", async (req,res) => {
     let lon = 0
     let returnVal = "";
     const address = JSON.parse(req.body);
-    const latLonRaw = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${address._value}&limit=5&appid=${process.env.API_KEY}`)
+    //console.log(address);
+    
+    const latLonRaw = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${address}&limit=5&appid=${process.env.API_KEY}`)
     const latLon = await latLonRaw.json()
 
     //If the location exist/is valid then we get 5 day weather forcast, if not then we return a 400
