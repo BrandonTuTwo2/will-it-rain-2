@@ -1,12 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 defineProps<{ isRainy: Boolean, cardDate: Date }>()
-
 const rainBG = "https://images.pexels.com/photos/1028600/pexels-photo-1028600.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb";
 const sunnyBG = "https://images.pexels.com/photos/1169084/pexels-photo-1169084.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb";
-
-const count = ref(0)
 </script>
 
 <template>
@@ -16,16 +11,12 @@ const count = ref(0)
             <h1 class="text-shadow" v-text="cardDate.toDateString()"></h1>
         </div>
         <div class="back">
-            <p>CHANCE of rain
-            </p>
-            <p>here</p>
+            <p>IS RAIN IS {{ isRainy }}</p>
         </div>
     </div>
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
-
 .flip {
     position: relative;
 
@@ -107,6 +98,7 @@ const count = ref(0)
 }
 
 .text-shadow {
+    color: White;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.04), 2px 2px rgba(0, 0, 0, 0.04), 3px 3px rgba(0, 0, 0, 0.04), 4px 4px rgba(0, 0, 0, 0.04), 0.125rem 0.125rem rgba(0, 0, 0, 0.04), 6px 6px rgba(0, 0, 0, 0.04), 7px 7px rgba(0, 0, 0, 0.04), 8px 8px rgba(0, 0, 0, 0.04), 9px 9px rgba(0, 0, 0, 0.04), 0.3125rem 0.3125rem rgba(0, 0, 0, 0.04), 11px 11px rgba(0, 0, 0, 0.04), 12px 12px rgba(0, 0, 0, 0.04), 13px 13px rgba(0, 0, 0, 0.04), 14px 14px rgba(0, 0, 0, 0.04), 0.625rem 0.625rem rgba(0, 0, 0, 0.04), 16px 16px rgba(0, 0, 0, 0.04), 17px 17px rgba(0, 0, 0, 0.04), 18px 18px rgba(0, 0, 0, 0.04), 19px 19px rgba(0, 0, 0, 0.04), 1.25rem 1.25rem rgba(0, 0, 0, 0.04);
 }
 </style>
