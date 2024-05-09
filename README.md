@@ -1,9 +1,23 @@
-# Vue 3 + TypeScript + Vite
+# Will It Rain? The Sequel 
+This is a web application that allows the user to simply enter in the location they would like to check to see if its going to rain in the next 5 days. This is a revamped version of my original web app of the same name that has been sent to the void because heroku stopped being free.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+[Check it out here!](https://will-it-rain.netlify.app/)
 
-## Recommended Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+## Tech Used
+- Vite
+- Vue.JS
+- Typescript
+- Netlify for hosting
+- Node.JS
 
-- Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+## Credits
+- The background gif was created by [Kiera Boyle](https://twitter.com/kiera_b_)
+- The little cloud gif was found [here](https://gifdb.com/gif/pixelated-cloud-rain-falling-mwk3rxzwj9gfse83.html)
+- Code by moi 
+
+
+
+
+
+

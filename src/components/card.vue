@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ isRainy: Boolean, cardDate: Date }>()
+defineProps<{ isRainy: Boolean, cardDate: Date, rainyEnd: String }>()
 const rainBG = "https://images.pexels.com/photos/1028600/pexels-photo-1028600.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb";
 const sunnyBG = "https://images.pexels.com/photos/1169084/pexels-photo-1169084.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb";
 </script>
@@ -11,7 +11,7 @@ const sunnyBG = "https://images.pexels.com/photos/1169084/pexels-photo-1169084.j
             <h1 class="text-shadow" v-text="cardDate.toDateString()"></h1>
         </div>
         <div class="back">
-            <p>IS RAIN IS {{ isRainy }}</p>
+            <p>{{ (isRainy) ? `Rain will end around ${rainyEnd}` : `Nothing to see here` }}</p>
         </div>
     </div>
 </template>

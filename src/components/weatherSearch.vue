@@ -8,8 +8,14 @@ import Swal from 'sweetalert2';
 const searchVal = ref('')
 let sixDays: Date[] = [];
 const rainy = ref(Array(6).fill(false));
+const rainyEnd = ref(Array(6).fill(""));
+const city = ref('');
+const province = ref('');
+const country = ref('');
+let location;
 
 const checkWeather = async () => {
+    let endTime, differenceInDays, differenceInTime, tempDate;
     if (searchVal.value.trim() !== "") {
         const res = await fetch('/api/getForecast', {
             method: "POST",
@@ -20,24 +26,36 @@ const checkWeather = async () => {
         });
 
         const restTest = await res.json();
-        const forecast = JSON.parse(restTest.forecast);
-        console.log(forecast);
+        if (restTest.statusCode === 200) {
+            location = JSON.parse(restTest.location);
+            const forecast = JSON.parse(restTest.forecast);
+            city.value = location.name
+            province.value = location.state
+            country.value = location.country
 
-        //set it back to false first
-        rainy.value.fill(false);
+            //set it back to false first
+            rainy.value.fill(false);
+            rainyEnd.value.fill("");
 
-        forecast.forEach((element) => {
-            if (Object.hasOwn(element, "rain")) {
-                let tempDate = new Date(Date.parse(element.dt_txt));
-                let differenceInTime = tempDate.getTime() - sixDays[0].getTime();
-                //should return something between 0 and 5
-                let differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24));
-                //let dateIndex = findDate(tempDate,sixDays);
-                rainy.value[differenceInDays] = true;
-                console.log(tempDate);
-            }
-        });
+            forecast.forEach((element) => {
+                if (Object.hasOwn(element, "rain")) {
+                    tempDate = new Date(Date.parse(element.dt_txt));
+                    differenceInTime = tempDate.getTime() - sixDays[0].getTime();
+                    //should return something between 0 and 5
+                    differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24));
+                    endTime = (tempDate.getHours() % 12 === 0) ? 12 : tempDate.getHours() % 12
+                    rainyEnd.value[differenceInDays] = `${endTime} ${(tempDate.getHours() < 12) ? "am" : "pm"}`
+                    rainy.value[differenceInDays] = true;
+                }
+            });
 
+        } else {
+            Swal.fire({
+                title: 'Error',
+                text: 'I could not find the location entered try double checking your input',
+                icon: 'error',
+            })
+        }
     } else {
         Swal.fire({
             title: 'Error',
@@ -54,7 +72,6 @@ const setNextsixDays = () => {
 
         sixDays.push(new Date(tempDay));
     }
-    //console.log(sixDays);
 }
 
 setNextsixDays();
@@ -63,19 +80,23 @@ setNextsixDays();
 
 <template>
     <Search1nput v-model="searchVal" :placeholder="'<Your address here> no I won\'t steal it'" />
+    <p>Location: {{ city }} {{ province }} {{ country }}</p>
     <br>
     <button class="button-50" @click="checkWeather()">Check</button>
     <br>
     <br>
-    <card :isRainy="rainy[0]" :cardDate="sixDays[0]" />
-    <card :isRainy="rainy[1]" :cardDate="sixDays[1]" />
-    <card :isRainy="rainy[2]" :cardDate="sixDays[2]" />
-    <card :isRainy="rainy[3]" :cardDate="sixDays[3]" />
-    <card :isRainy="rainy[4]" :cardDate="sixDays[4]" />
-    <card :isRainy="rainy[5]" :cardDate="sixDays[5]" />
+    <card :isRainy="rainy[0]" :cardDate="sixDays[0]" :rainyEnd="rainyEnd[0]" />
+    <card :isRainy="rainy[1]" :cardDate="sixDays[1]" :rainyEnd="rainyEnd[1]" />
+    <card :isRainy="rainy[2]" :cardDate="sixDays[2]" :rainyEnd="rainyEnd[2]" />
+    <card :isRainy="rainy[3]" :cardDate="sixDays[3]" :rainyEnd="rainyEnd[3]" />
+    <card :isRainy="rainy[4]" :cardDate="sixDays[4]" :rainyEnd="rainyEnd[4]" />
+    <card :isRainy="rainy[5]" :cardDate="sixDays[5]" :rainyEnd="rainyEnd[5]" />
 </template>
 
 <style scoped>
+p {
+    color: #3BABFD;
+}
 .button-50 {
     appearance: button;
     background-color: #000;
